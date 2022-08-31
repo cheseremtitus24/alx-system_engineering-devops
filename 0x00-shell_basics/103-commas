@@ -1,3 +1,2 @@
 #!/bin/bash
-ls -aFm
-echo
+ls -aFm;echo
