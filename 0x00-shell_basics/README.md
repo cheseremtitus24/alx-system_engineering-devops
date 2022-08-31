@@ -38,3 +38,21 @@
 *Remove a file using its absolute file path* **8-firstdelete**
 
 *Delete an empty directory* man rmdir **9-firstdirdeletion**
+
+#Creating a custom magic file database
+When matching a string the magic file contains the first line that is of the following format
+filename: school
+[Offset byte start of file] [type of data to search for can be a string/number/regex] [matching text] [generic display string should be informative]
+[!:mime] [Mimetype name that is displayed when running file --mime-type filename]
+
+To compile this file into an executable magic file compile it using the following command
+file -C -m school
+when file contents are listed there will be the file school.mgc which will be created.
+
+use this compiled file using the following command 
+file -m school.mgc *
+
+Contents on the magic file can be defined in more details through diving into the following articles and blog posts
+https://stackoverflow.com/questions/7236191/how-to-create-a-custom-magic-file-database
+http://cweiske.de/tagebuch/custom-magic-db.htm
+https://linux.die.net/man/5/magic
