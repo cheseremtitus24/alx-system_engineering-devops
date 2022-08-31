@@ -41,15 +41,22 @@
 
 # Creating a custom magic file database
 When matching a string the magic file contains the first line that is of the following format
+
 filename: school
+
 [Offset byte start of file] [type of data to search for can be a string/number/regex] [matching text] [generic display string should be informative]
+
 [!:mime] [Mimetype name that is displayed when running file --mime-type filename]
 
-To compile this file into an executable magic file compile it using the following command
+
+**To compile this file into an executable magic file compile it using the following command**
+
 file -C -m school
+
 when file contents are listed there will be the file school.mgc which will be created.
 
-use this compiled file using the following command 
+**use this compiled file using the following command** 
+
 file -m school.mgc *
 
 ### Contents on the magic file can be defined in more details through diving into the following articles and blog posts
