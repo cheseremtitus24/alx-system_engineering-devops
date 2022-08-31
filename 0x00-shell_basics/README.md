@@ -61,5 +61,9 @@ file -m school.mgc *
 
 ### Contents on the magic file can be defined in more details through diving into the following articles and blog posts
 https://stackoverflow.com/questions/7236191/how-to-create-a-custom-magic-file-database
+
 http://cweiske.de/tagebuch/custom-magic-db.htm
+
 https://linux.die.net/man/5/magic
+
+https://github.com/cweiske/MIME_Type_PlainDetect
