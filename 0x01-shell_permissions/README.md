@@ -26,6 +26,10 @@ NOTE: A handy way to crosscheck the octal notation is by running (**stat -c "%a"
 11-directories_permissions - In order to only change the permissions of directories recursively you will have to use the (**-R **) recursive option and the (**-X) option which only applies execute permission to only folders/directories.
 (** chmod -R a=X ./ **)
 
- 
+12-directory_permissions - to dynamically create a directory while assigning file permissions you have to use the (*-m*) option in which you can provide the octal mode (**mkdir -m 751 new_dir**)  
+
+13-change_group - Reasigns group ownership of a file (**chgrp alternate_group filename**)
+
+100
 
 
