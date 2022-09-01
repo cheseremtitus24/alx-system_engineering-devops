@@ -34,6 +34,9 @@ NOTE: A handy way to crosscheck the octal notation is by running (**stat -c "%a"
 
 101-symbolic_link_permissions - changes a symbolic links' ownership by using the -h commandline option which prevents the command from dereferencing the link and changing the ownership of the target that the link is refering to. (**chown -h user:group symbolic_link**)
 
+102-if_only - changes the ownership of a file to betty only if the file was previously owned by the specified user/owner. The (** chown --from=OWNER:GROUP**) allows one to specify a file owner and the group to match in order to change the found files ownership . (** chown --from=currentowner:currentgroup newowner:newownersgroup filename **)
+
+
 
 
 
