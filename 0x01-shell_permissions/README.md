@@ -12,7 +12,7 @@ NOTE: A handy way to crosscheck the octal notation is by running (**stat -c "%a"
 
 5-execute - In order to modify a files permission you must be owner of that file. The owner is the user who's active session created the file/directory. In order to change its permission you can use the symbolic or octal system. In adding the execute permission you can use this (*chmod u+x filename*) or (*chmod 764 filename)
 
-6-multiple_permissions - in the octal system (4=r,1=x,2=w) therefore for rx_ rx_ r__  for owner,group,other respectively would be (*chmod 554 filename*). While using the symbolic system you would use (*chmod u+rx-w,g+rx-w,o+r-xw filename*) the u-is owner, the g-is for user's group and o-is for everybody. The + preceding the symbol applies the permission bits whereas the - subtracts the specified permission bits.
+6-multiple_permissions - (**chmod ug+x,o+r hello**)  in the octal system (4=r,1=x,2=w) therefore for rx_ rx_ r__  for owner,group,other respectively would be (*chmod 554 filename*). While using the symbolic system you would use (*chmod u+rx-w,g+rx-w,o+r-xw filename*) the u-is owner, the g-is for user's group and o-is for everybody. The + preceding the symbol applies the permission bits whereas the - subtracts the specified permission bits.
 
 7-everybody - the owner should have rwx permissions and the group rx permission and others should only have x permission. using the octal system we can easily substitute this as (4=r,1=x,2=w) u=4+1+2: 7 g=4+1: 5 o=1: 1 = 751 (*chmod 751 file_name*)
 
