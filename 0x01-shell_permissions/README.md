@@ -30,6 +30,10 @@ NOTE: A handy way to crosscheck the octal notation is by running (**stat -c "%a"
 
 13-change_group - Reasigns group ownership of a file (**chgrp alternate_group filename**)
 
-100
+100-change_owner_and_group - changes the owner and group that owns a file. (**chown newowner:newownergroup filename**)
+
+101-symbolic_link_permissions - changes a symbolic links' ownership by using the -h commandline option which prevents the command from dereferencing the link and changing the ownership of the target that the link is refering to. (**chown -h user:group symbolic_link**)
+
+
 
 
