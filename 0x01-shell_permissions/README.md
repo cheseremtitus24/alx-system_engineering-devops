@@ -21,6 +21,11 @@ NOTE: A handy way to crosscheck the octal notation is by running (**stat -c "%a"
 9-John_Doe - apply full (*rwx*) permission for owner, (*rx*) for owner's group and (*wx*) for everybody else. substituting we have u=4+2+1 g=4+1 o=2+1 = 753
 **(chmod 753 filename)**
 
-10-mirror_permissions - the file permissions of olleh is u=rw_ g=rw_ o=r__ substituting with the octal system this is equivalent to user=4+2 group=4+2 other=4 which is **(chmod 664 file_name)** 
+10-mirror_permissions - --reference=ref_file option allows you mirror the permissions of a defined file (**chmod --reference=ref_file copycatfile**)
+
+11-directories_permissions - In order to only change the permissions of directories recursively you will have to use the (**-R **) recursive option and the (**-X) option which only applies execute permission to only folders/directories.
+(** chmod -R a=X ./ **)
+
+ 
 
 
