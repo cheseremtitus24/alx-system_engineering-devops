@@ -36,6 +36,8 @@ NOTE: A handy way to crosscheck the octal notation is by running (**stat -c "%a"
 
 102-if_only - changes the ownership of a file to betty only if the file was previously owned by the specified user/owner. The (** chown --from=OWNER:GROUP**) allows one to specify a file owner and the group to match in order to change the found files ownership . (** chown --from=currentowner:currentgroup newowner:newownersgroup filename **)
 
+103-Star_Wars - pulls down a prewritten resource that plays star wars IV over ASCII Text in the Terminal. 
+
 
 
 
