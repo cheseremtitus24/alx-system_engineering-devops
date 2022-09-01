@@ -1,0 +1,26 @@
+NOTE: A handy way to crosscheck the octal notation is by running (**stat -c "%a" filename**)
+
+0-iam_betty - is a script that invokes the **substitute user (*su*)** command to temporarily gain access to a shell in the context of the user betty.
+
+1-who_am_i - is a script that utilizes the (*whoami*) command to output the currently logged in user's name
+
+2-groups - prints all the groups that the current logged in user belongs to. command (*groups*)
+
+3-new_owner - Changing a file ownership requires elevated privileges and this scripts invokes (*sudo chown new_file_owner filename*).
+
+4-empty - To create an empty file you use (*touch new_empty_file*);
+
+5-execute - In order to modify a files permission you must be owner of that file. The owner is the user who's active session created the file/directory. In order to change its permission you can use the symbolic or octal system. In adding the execute permission you can use this (*chmod u+x filename*) or (*chmod 764 filename)
+
+6-multiple_permissions - in the octal system (4=r,1=x,2=w) therefore for rx_ rx_ r__  for owner,group,other respectively would be (*chmod 554 filename*). While using the symbolic system you would use (*chmod u+rx-w,g+rx-w,o+r-xw filename*) the u-is owner, the g-is for user's group and o-is for everybody. The + preceding the symbol applies the permission bits whereas the - subtracts the specified permission bits.
+
+7-everybody - the owner should have rwx permissions and the group rx permission and others should only have x permission. using the octal system we can easily substitute this as (4=r,1=x,2=w) u=4+1+2: 7 g=4+1: 5 o=1: 1 = 751 (*chmod 751 file_name*)
+
+8-James_Bond - no permissions for a file is represented by octal number zero (*0*) and full permission (rwx) is summs up to 7. therefore the command will be (*chmod 007 file_name*)
+
+9-John_Doe - apply full (*rwx*) permission for owner, (*rx*) for owner's group and (*wx*) for everybody else. substituting we have u=4+2+1 g=4+1 o=2+1 = 753
+**(chmod 753 filename)**
+
+10-mirror_permissions - the file permissions of olleh is u=rw_ g=rw_ o=r__ substituting with the octal system this is equivalent to user=4+2 group=4+2 other=4 which is **(chmod 664 file_name)** 
+
+
