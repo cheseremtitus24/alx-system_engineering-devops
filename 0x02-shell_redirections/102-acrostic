@@ -1,2 +1,2 @@
 #!/bin/bash
-cut -d " " -f1|tr -cd [[:upper:]]
+cut -d " " -f1|tr -cd [[:upper:]]|fmt
