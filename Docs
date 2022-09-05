@@ -1,0 +1,20 @@
+Shell, basics Take Aways
+ cp -u *.html destination - copies updated files to destination
+
+
+Regular Expressions 
+[characters] 	Matches any character that is a member of the set characters. The set of characters may also be expressed as a POSIX character class such as one of the following:
+POSIX Character Classes [:alnum:] 	Alphanumeric characters
+[:alpha:] 	Alphabetic characters
+[:digit:] 	Numerals
+[:upper:] 	Uppercase alphabetic characters
+[:lower:] 	Lowercase alphabetic characters
+[!characters] 	Matches any character that is not a member of the set characters
+
+
+[[:upper:]]* Any filename that begins with an uppercase letter. This is an example of a character class.
+
+*[![:upper:]] Any filename that does not end with an uppercase letter.
+
+
+

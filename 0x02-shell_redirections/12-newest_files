@@ -1,0 +1,2 @@
+#!/bin/bash
+ls -AtpB -1 | grep --invert-match  "/" | head -n 10
