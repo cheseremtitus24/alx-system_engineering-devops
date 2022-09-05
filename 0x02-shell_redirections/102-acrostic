@@ -1,2 +1,2 @@
 #!/bin/bash
-cut -d " " -f 1| tr -cd [[:upper:]]| echo
+cut -d " " -f 1| tr -cd [[:upper:]]| tr -d [[:blank:]] 
