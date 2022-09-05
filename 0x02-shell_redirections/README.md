@@ -43,6 +43,15 @@
 
 22-users_and_homes - outputs a sorted and field delimited result with username and home directories from the the /etc/passwd file
 
+100-empty_casks - outputs all the files and directories that are empty. The script does not print full file paths.
+
+101-gifs - outputs all the filenames less the file extension of items in the current directory tree than have the extension '.gif' and prints them in a sorted order that is case insensitive.
+102-acrostic - outputs the concatenation of the first letter of every character that begins a sentence.
+103-the_biggest_fan - ouputs the hostname/ip-address of the most domain visit/interraction of the 11 most frequent visitors. 
+
+
+
+
 
 
 
