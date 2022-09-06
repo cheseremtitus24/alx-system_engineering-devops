@@ -10,7 +10,15 @@ POSIX Character Classes [:alnum:] 	Alphanumeric characters
 [:upper:] 	Uppercase alphabetic characters
 [:lower:] 	Lowercase alphabetic characters
 [!characters] 	Matches any character that is not a member of the set characters
-
+[:alnum:]      all letters and digits
+[:blank:]     all horizontal whitespace
+[:cntrl:]     all control characters
+[:graph:]     all printable characters, not including space
+[:print:]     all printable characters, including space
+[:punct:]     all punctuation characters
+[:space:]     all horizontal or vertical whitespace
+[:xdigit:]    all hexadecimal digits
+[=CHAR=]      all characters which are equivalent to CHAR
 
 [[:upper:]]* Any filename that begins with an uppercase letter. This is an example of a character class.
 
