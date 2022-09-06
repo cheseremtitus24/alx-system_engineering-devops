@@ -68,6 +68,14 @@ To display all Local variables you'd use the following command
 diff set.sorted printenv.sorted
 
 
+** RESERVED VARIABLES ** - are similar to reserved words in languages such as c. These variables variables are sometimes set by default. The variables also have the
+characteristic of being assignable. 
+e.g. 
+PS1="customprompt> "
+
+
+** SPECIAL PARAMETERS ** - These are readonly variables that are assigned dynamically by the shell. e.g $# , $?, $$
+
 
 
 
