@@ -1,0 +1,29 @@
+### Tilde Expansion
+echo ~
+*When username is provided it expands to show the user's home directory*
+echo ~username
+
+### Arithmetic Expansion (No support for Decimals)
+** Arithmetic operands and operators must be enclosed within double outer quotes for it to be evaluated.
+echo $(( (15**2)*2 ))
+
+### Brace Expansion preamble{..}postscript
+mkdir Hello_world_{1..5}_doc
+mkdir Hello_world_{1,2,3}_doc
+
+### Command Substitution
+** Important when you want to store the results of a command to a variable **
+result=$(which ls); OR result=`which ls`;
+echo "$result";
+
+### Quoting
+** Can be utilized in order prevent unwanted parameter expansions of special characters e.g [~,&]**
+
+#### Double Quotes
+Exceptions that are not expanded are [`,$,\] - *back-quote,dollar sign, backslash*
+Allows for : *Parameter Expansion, arithmetic expansion and command substitution*
+Benefit is that Word-substitution is suppressed which involves removing repeated line feed characters.[spaces,tabs,newline]
+echo $(cal)
+echo "$(cal)"
+
+
