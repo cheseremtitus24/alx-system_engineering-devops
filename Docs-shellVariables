@@ -1,0 +1,46 @@
+## Supported Variable types in bash
+1. String
+2. Interger
+3. Contants
+4. Arrays
+
+### Creating **Local Variables**
+MYVAR="hello"
+MYVAR=2
+MYVAR=$USER
+MYVAR=[1,2,3,4]
+unset MYVAR # destroys the assignment and frees memory usage
+
+### Creating Environment Variables
+export hello="World"
+bash # This subshell can still access the set variable but cannot change it for the parent shell 
+echo $hello
+export hello="To local Community"
+echo $hello 
+exit #exits the subshell and returns to parent shell
+echo $hello # will print the original text "World" instead of the "To local Community"
+
+### Reserved Bash Variables
+PS1 - The primary prompt string
+BASH - path to bash binary file
+BASH_ENV - set this in order for scripts to use a custom bash path for startup before executing the rest of the commands
+BASH_VERSION
+EUID  - similar to id -i
+UID - similar to id -i
+GROUPS - similar to id -g
+HOSTTYPE - machine architecture x86 | x86_64
+OSTYPE - linux-gnue
+MACHTYPE - x86_64-pc-linux-gnu
+HISTCMD - history command id of current cmd
+
+## Use these to constrain a session
+$LINENO - lines of executed commands in an active shell -- Limit the commands executed in a shell
+PPID - the shell's parent process . Kill the current shell using : kill $PPID - kill the shell when quota number of $LINENO is reached
+SECONDS - use this to check the total active time of the current shell - e.g limit shell usage to a max of i.e 800 seconds before closing it.
+SHLVL - tracks the number of cumulative parent and subshells created. You can utilize this to limit the number of subshells to create exceeded ones and killed.
+TMOUT - if set to a value greater than 0 and no user input is received within that specified time. The Shell with self terminate.
+RANDOM - reference this in a script to generate random numbers between 0 and 32767
+
+
+
+
