@@ -41,6 +41,21 @@ SHLVL - tracks the number of cumulative parent and subshells created. You can ut
 TMOUT - if set to a value greater than 0 and no user input is received within that specified time. The Shell with self terminate.
 RANDOM - reference this in a script to generate random numbers between 0 and 32767
 
+$! - expands to PID of the recently backgrounded program
+$? - expands to the Exit status of rececently executed foreground pipeline
+$0 - expands to Name of the shell or script
+$# - Number of Positional parameters
+$_ - contains the absolute file name of the script being executed as passed in the argument list
+$$ - expands to the process id of the shell. *This you can use to kill all the backgrounded processes from a different shell*
+
+
+#### Aliases
+alias p="pwd"; l='ls -al'  # Creates two aliases in one command
+
+Systemwide aliases are written to the /etc/bash.bashrc file
+user-specific aliases are written to the $HOME/.bashrc file
+
+unalias p;l
 
 
 
