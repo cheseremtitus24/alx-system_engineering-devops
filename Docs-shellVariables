@@ -57,5 +57,27 @@ user-specific aliases are written to the $HOME/.bashrc file
 
 unalias p;l
 
+# Global/Environment & Local Variables in BASH
+global or environment variables are accessible in all shells.
+*env & printenv* are used to display these global variables.
+
+export MYGLOBVAR="World" #**creates a global variable**
+HELLO=33 #**Creates a Local variable**
+
+To display all Local variables you'd use the following command
+diff set.sorted printenv.sorted
+
+
+** RESERVED VARIABLES ** - are similar to reserved words in languages such as c. These variables variables are sometimes set by default. The variables also have the
+characteristic of being assignable. 
+e.g. 
+PS1="customprompt> "
+
+
+** SPECIAL PARAMETERS ** - These are readonly variables that are assigned dynamically by the shell. e.g $# , $?, $$
+
+
+
+
 
 
