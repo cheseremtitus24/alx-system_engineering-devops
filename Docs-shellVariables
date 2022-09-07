@@ -80,6 +80,7 @@ PS1="customprompt> "
 
 #!/bin/bash
 echo $1 $2 $3 $4
+# echo -e -> enables echo to interpret backslash characters such as \n, \t, \r and so on.
 echo -e "#The number of input parameters are \n $#";
 echo -e "#The name of the script is \n $0";
 echo -e "#The exit status of this file's execution is \n $?";
@@ -90,6 +91,14 @@ echo -e "#The process ID of current shell is \n $$";
 printf '#Executing file $(which ls) 1>/dev/null\n';
 file $(which ls) 1>/dev/null
 echo -e "#Full script path of the last command args param is \n ( $_)";
+printf '#Executing watch ls -al & \n';
+watch ls -al &
+echo -e " Process id of the backgrounded process is \n $!";
+printf 'Killing the process using kill $! \n';
+kill $!
+echo "the killing exit status is $?"
+
+
 
 -- Executing the script after saving the above contents within myscript.sh
 
