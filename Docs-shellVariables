@@ -1,4 +1,4 @@
-## Supported Variable types in bash
+## Supported Variable types in bash #N/B When assigning variables " myvar="hello" is correct noting that no spaces are allowed in between"
 1. String
 2. Interger
 3. Contants
@@ -11,7 +11,7 @@ MYVAR=$USER
 MYVAR=[1,2,3,4]
 unset MYVAR # destroys the assignment and frees memory usage
 
-### Creating Environment Variables
+### Creating Environment/Global Variables
 export hello="World"
 bash # This subshell can still access the set variable but cannot change it for the parent shell 
 echo $hello
@@ -75,9 +75,28 @@ PS1="customprompt> "
 
 
 ** SPECIAL PARAMETERS ** - These are readonly variables that are assigned dynamically by the shell. e.g $# , $?, $$
+---Script name myscript.sh
 
-$# - Represents the total number of commandline arguments for example $ cat file1.txt file2.txt file3.txt file4.txt
-echo $# # results to 4
+
+#!/bin/bash
+echo $1 $2 $3 $4
+echo -e "#The number of input parameters are \n $#";
+echo -e "#The name of the script is \n $0";
+echo -e "#The exit status of this file's execution is \n $?";
+echo -e "#The individual parameter values are \n ($*)";
+echo -e "#The individual parameter values are \n ($@)";
+echo -e "#The set input options are \n $-";
+echo -e "#The process ID of current shell is \n $$";
+printf '#Executing file $(which ls) 1>/dev/null\n';
+file $(which ls) 1>/dev/null
+echo -e "#Full script path of the last command args param is \n ( $_)";
+
+-- Executing the script after saving the above contents within myscript.sh
+
+chmod +x myscript.sh
+./myscript.sh
+
+
 
 
 
