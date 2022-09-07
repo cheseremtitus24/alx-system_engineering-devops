@@ -76,6 +76,8 @@ PS1="customprompt> "
 
 ** SPECIAL PARAMETERS ** - These are readonly variables that are assigned dynamically by the shell. e.g $# , $?, $$
 
+$# - Represents the total number of commandline arguments for example $ cat file1.txt file2.txt file3.txt file4.txt
+echo $# # results to 4
 
 
 
