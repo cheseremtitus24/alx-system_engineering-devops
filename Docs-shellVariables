@@ -1,4 +1,4 @@
-## Supported Variable types in bash
+## Supported Variable types in bash #N/B When assigning variables " myvar="hello" is correct noting that no spaces are allowed in between"
 1. String
 2. Interger
 3. Contants
@@ -11,7 +11,7 @@ MYVAR=$USER
 MYVAR=[1,2,3,4]
 unset MYVAR # destroys the assignment and frees memory usage
 
-### Creating Environment Variables
+### Creating Environment/Global Variables
 export hello="World"
 bash # This subshell can still access the set variable but cannot change it for the parent shell 
 echo $hello
@@ -75,6 +75,50 @@ PS1="customprompt> "
 
 
 ** SPECIAL PARAMETERS ** - These are readonly variables that are assigned dynamically by the shell. e.g $# , $?, $$
+---Script name myscript.sh
+
+
+#!/bin/bash
+echo $1 $2 $3 $4
+# echo -e -> enables echo to interpret backslash characters such as \n, \t, \r and so on.
+echo -e "#The number of input parameters are \n $#";
+echo -e "#The name of the script is \n $0";
+echo -e "#The exit status of this file's execution is \n $?";
+echo -e "#The individual parameter values are \n ($*)";
+echo -e "#The individual parameter values are \n ($@)";
+echo -e "#The set input options are \n $-";
+echo -e "#The process ID of current shell is \n $$";
+printf '#Executing file $(which ls) 1>/dev/null\n';
+file $(which ls) 1>/dev/null
+echo -e "#Full script path of the last command args param is \n ( $_)";
+printf '#Executing watch ls -al & \n';
+watch ls -al &
+echo -e " Process id of the backgrounded process is \n $!";
+printf 'Killing the process using kill $! \n';
+kill $!
+echo "the killing exit status is $?"
+
+
+
+-- Executing the script after saving the above contents within myscript.sh
+
+chmod +x myscript.sh
+./myscript.sh
+
+## Base Number Conversions
+
+#!/bin/bash
+
+binarynumber=1010;
+echo $((2#$binarynumber))
+hex=A; # equivalent to 10#10
+echo $((16#$hex)) # on conversion it output 10
+decimal=10;
+echo 10 decimal to hex conversion is $((16#$decimal))
+decimal=16;
+echo 16 decimal to hex conversion is $((16#$decimal))
+decimal=16;
+echo 16 decimal to binary conversion is $((2#$decimal))
 
 
 
