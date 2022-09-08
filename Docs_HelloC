@@ -35,3 +35,17 @@ echo "$((2#$BINARY))"
 >>   0 0 0 0 0 0 1 0  -- similar to dividing by 2. # Add a zero to the left end and delete the far right digit regardeless of whether (0 or 1)
 #results to 5/2=2
 
+### Affectations usage
+*filename = hello.c*
+...
+        int sum=0;
+        int value = 5;
+         sum = value<<1;
+
+        printf("The result is %d\n",sum); // 10
+        sum = value>>1;
+        printf("The result is %d\n",sum); // 2
+        
+
+        
+
