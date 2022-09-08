@@ -46,6 +46,11 @@ echo "$((2#$BINARY))"
         sum = value>>1;
         printf("The result is %d\n",sum); // 2
         
+         value>>=1; //Division 5/2 = 2
+        printf("The result is %d\n",value);
+         value<<=1; //Multiplication 5*2 = 10
+        printf("The result is %d\n",value);
+        
 
         
 
