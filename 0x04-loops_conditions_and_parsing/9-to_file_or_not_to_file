@@ -1,0 +1,24 @@
+#!/usr/bin/env bash
+# This script checks that the file named "school" is a regular file and that it is not empty else it will report otherwise.
+filename="school"
+for _ in $(pwd) ;do
+	if [ -e $filename ]
+	then
+		echo "$filename file exists"
+		# check if file is empty
+		if [ "$(file "$filename" | cut --delimiter=" " -f 2)" = "empty" ]
+		then
+			echo "$filename file is empty"
+		else
+			echo "$filename file is not empty"
+		fi
+		# check if file is a regular file
+		if [ -f $filename ]
+		then
+			echo "$filename is a regular file"
+		fi
+	else
+		echo "$filename file does not exist"
+
+	fi
+done

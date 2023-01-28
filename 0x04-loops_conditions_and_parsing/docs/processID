@@ -1,0 +1,22 @@
+The default maximum value of PIDs is 32,767
+cat /proc/sys/kernel/pid_max
+#32768
+
+The PIDs for the processes currently on the system can be found by using the
+ps command or the pstree command.
+
+pidof chromium # returns the process id of a processes
+
+process id of init is 1 and all PIDs are unsigned.
+
+######################Caveats of knowing info about a process id##############
+
+There is a numbered directory in /proc corresponding to each PID currently on the system. Each of the directories contains several standard files containing information about the process. For example, the file cmdline contains the name of the command (along with any options and arguments) that the process was started with, and it can be easily read with the cat or head command. For instance, the cmdline file for PID 1 can be read as follows:
+
+cat /proc/1/cmdline
+
+On most systems it will be necessary to use the root (i.e., administrative) account, which can be accessed by using the su (i.e., substitute user) command, to read files in the /proc directory.
+
+More extensive information can be found about any PID and the process it represents by reading the PID's status file, which is also found in its directory in /proc. For example, the following would display the contents of the status file for PID 1:
+
+cat /proc/1/status
