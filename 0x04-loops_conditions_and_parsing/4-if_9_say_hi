@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+# This script prints "Best School" 9 times and "Hi" once
 counter=0
 while [ $counter -lt 10 ];do
 	((counter++))

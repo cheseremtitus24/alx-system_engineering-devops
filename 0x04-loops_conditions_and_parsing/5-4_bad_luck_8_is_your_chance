@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+# This script prints "Best School" 8 times and conditionally "good luck" and "bad luck"
 counter=0
 while [ $counter -lt 10 ];do
 	((counter++))

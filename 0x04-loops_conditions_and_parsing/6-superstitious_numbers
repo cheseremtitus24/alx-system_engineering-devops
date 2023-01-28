@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+# This script uses case to print conditionally when counter is 4,9 and 17 respectively.
 counter=0
 while [ $counter -lt 20 ];do
 	((counter++))

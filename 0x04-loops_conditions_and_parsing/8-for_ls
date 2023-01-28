@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+# This script displays a directory listing without sequence numbers 
+for file in $(ls . | cut --delimiter='-' -f 2);do
+	echo "$file"
+done
