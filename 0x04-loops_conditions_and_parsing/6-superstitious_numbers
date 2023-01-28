@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+counter=0
+while [ $counter -lt 20 ];do
+	((counter++))
+	case $counter in
+		4) echo "$counter";echo "bad luck from China";;
+		9) echo "$counter";echo "bad luck from Japan";;
+		17) echo "$counter";echo "bad luck from Italy";;
+		*) echo "$counter";;
+	esac
+
+done;
