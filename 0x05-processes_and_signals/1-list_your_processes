@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+# prints the current running processes
+ps -efa;
