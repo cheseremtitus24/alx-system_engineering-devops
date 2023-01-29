@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+# prints the current running  bash processes
+result=$(pidof bash)
+for id in $result; do
+	if [ "$id" -eq "$$" ]
+	then 
+		echo "$id bash"
+	else
+		echo "$id bash"
+	fi
+done
