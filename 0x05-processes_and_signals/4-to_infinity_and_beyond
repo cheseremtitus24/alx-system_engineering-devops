@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+# prints the "To infinity and beyond" to infinity with a cooldown of 2 seconds
+while (true); do
+	echo "To infinity and beyond"
+	sleep 2
+done
