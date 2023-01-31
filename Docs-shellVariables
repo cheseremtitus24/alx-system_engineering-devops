@@ -40,7 +40,7 @@ SECONDS - use this to check the total active time of the current shell - e.g lim
 SHLVL - tracks the number of cumulative parent and subshells created. You can utilize this to limit the number of subshells to create exceeded ones and killed.
 TMOUT - if set to a value greater than 0 and no user input is received within that specified time. The Shell with self terminate.
 RANDOM - reference this in a script to generate random numbers between 0 and 32767
-
+## Resourced @: https://www.thegeekstuff.com/2010/05/bash-shell-special-parameters/
 $! - expands to PID of the recently backgrounded program
 $? - expands to the Exit status of rececently executed foreground pipeline
 $0 - expands to Name of the shell or script

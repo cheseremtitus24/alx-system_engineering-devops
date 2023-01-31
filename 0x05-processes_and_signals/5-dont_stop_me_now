@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+# prints the "To infinity and beyond" to infinity with a cooldown of 2 seconds
+kill -9 $_
