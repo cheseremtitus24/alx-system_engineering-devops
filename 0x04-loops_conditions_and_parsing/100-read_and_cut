@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # This script prints #username #user id #Home directory path for the user
-while read line;do
-	format=$(echo $line|cut --delimiter=":" -f 1,3,6)
+while read -r line;do
+	format=$(echo "$line"|cut --delimiter=":" -f 1,3,6)
 	echo "$format"
 done < /etc/passwd
