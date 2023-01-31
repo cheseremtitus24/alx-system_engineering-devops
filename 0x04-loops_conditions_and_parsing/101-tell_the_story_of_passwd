@@ -1,6 +1,5 @@
 #!/usr/bin/env bash
-# This script prints #username #user id #Home directory path for the user
-# Futher documents the details detailed within the /etc/shadow file
+# This script prints #username #user id #Home directory path for the user Futher documents the details detailed within the /etc/shadow file
 while read -r line;do
 	#format=$(echo "$line"|cut --delimiter=":" -f 1,2,3,6,7)
 	user=$(echo "$line"|cut --delimiter=":" -f 1)
