@@ -1,0 +1,12 @@
+netcat usage Resource:
+1. 1. server not killed when session is terminated using (-k) flag
+2. kill session after a specified timeout period using the -w flag [mutually exclusive with the -l flag]
+3. Don't kill client session when EOF is hit using the -q flag
+
+4. Disabling Reading from STDIN in Netcat on the client side
+
+# connect to server using the following
+> nc -d localhost srv_port
+
+# The text input at client side will not reach to server thread.
+
