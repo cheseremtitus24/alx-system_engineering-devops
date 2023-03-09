@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+# This script prints ip address and HTTP status
+awk '{ print $1" " $9 }' < apache-access.log

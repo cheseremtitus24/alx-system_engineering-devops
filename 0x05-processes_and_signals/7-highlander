@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+# prints the "To infinity and beyond" to infinity with a cooldown of 2 seconds
+msg="I am invincible!!!"
+handle_signal()
+{
+	echo "$msg";
+}
+while (true); do
+	echo "To infinity and beyond"
+	trap handle_signal SIGTERM
+	sleep 2
+done

@@ -1,3 +1,11 @@
 #!/usr/bin/env bash
-# prints the "To infinity and beyond" to infinity with a cooldown of 2 seconds
-kill -9 $_
+# kills all processes that are spawned from bash and have the name "4-to_infinity_and_beyond"
+process_name="4-to_infinity_and_beyond"
+pids=$(pgrep -a bash | grep $process_name | cut --delimiter=" " -f 1)
+#pids=$(ps -ef |grep "bash ./4-to_infinity_and_beyond" | grep -v "auto"| cut --delimiter=" " -f 6)
+for ids in $pids; do
+	if [ "$ids" -ne "$$" ]
+	then
+		kill "$ids"
+	fi
+done
