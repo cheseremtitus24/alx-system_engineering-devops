@@ -1,5 +1,6 @@
 # Installs flask python package
-package { 'python3-flask':
+package { 'Flask':
   ensure => installed,
+  name   => 'python3-flask',
 }
 
