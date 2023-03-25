@@ -1,0 +1,42 @@
+# List docker images
+docker images
+# lauch docker image interractively
+cheserem@cheserem:~$ docker images
+REPOSITORY   TAG       IMAGE ID       CREATED         SIZE
+ubuntu       16.04     276b5b6b7721   11 months ago   128MB
+cheserem@cheserem:~$ docker run -ti 276b5b6b7721
+root@aa8834f09050:/# whoami
+root
+root@aa8834f09050:/# exit
+exit
+
+## Run Docker Image in Background
+cheserem@cheserem:~/alx-system_engineering-devops/docker$ docker images
+REPOSITORY   TAG       IMAGE ID       CREATED         SIZE
+ubuntu       16.04     276b5b6b7721   11 months ago   128MB
+cheserem@cheserem:~/alx-system_engineering-devops/docker$ docker run --detach --tty --interactive 276b5b6b7721
+974e0cfb3ae48e2c9027b3447a906c9d582bff81b4d23e64b4c82a7a263c3bfd
+cheserem@cheserem:~/alx-system_engineering-devops/docker$ docker ps
+CONTAINER ID   IMAGE          COMMAND       CREATED          STATUS         PORTS     NAMES
+974e0cfb3ae4   276b5b6b7721   "/bin/bash"   10 seconds ago   Up 5 seconds             focused_mcclintock
+cheserem@cheserem:~/alx-system_engineering-devops/docker$ # interract with it
+cheserem@cheserem:~/alx-system_engineering-devops/docker$ docker exec --interactive --tty 276b5b6b7721 /bin/bash
+Error: No such container: 276b5b6b7721
+cheserem@cheserem:~/alx-system_engineering-devops/docker$ docker exec --interactive --tty 974e0cfb3ae4 /bin/bash
+root@974e0cfb3ae4:/# whoami
+root
+root@974e0cfb3ae4:/# hostname
+974e0cfb3ae4
+root@974e0cfb3ae4:/# exit
+exit
+
+## Kill and Stop CONTAINER
+
+cheserem@cheserem:~/alx-system_engineering-devops/docker$ docker ps
+CONTAINER ID   IMAGE          COMMAND       CREATED         STATUS         PORTS     NAMES
+974e0cfb3ae4   276b5b6b7721   "/bin/bash"   3 minutes ago   Up 3 minutes             focused_mcclintock
+cheserem@cheserem:~/alx-system_engineering-devops/docker$ docker kill 974e0cfb3ae4
+974e0cfb3ae4
+cheserem@cheserem:~/alx-system_engineering-devops/docker$ docker ps
+CONTAINER ID   IMAGE     COMMAND   CREATED   STATUS    PORTS     NAMES
+cheserem@cheserem:~/alx-system_engineering-devops/docker$ 
