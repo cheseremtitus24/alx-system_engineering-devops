@@ -1,3 +1,3 @@
 #!/usr/bin/env bash
 # This script performs a login using a public key to a server
-ssh -i "~/.ssh/school" ubuntu@54.210.108.11
+ssh -i ~/.ssh/school ubuntu@54.210.108.11
