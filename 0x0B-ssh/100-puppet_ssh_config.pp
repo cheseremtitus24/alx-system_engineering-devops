@@ -11,7 +11,7 @@ file_line { 'Turn off passwd auth':
 #regex to use to search/locate the line
   match  => '^*PasswordAuthentication *',
 #only replace when the line is present
-  path   => '/home/cheserem/alx-system_engineering-devops/0x0B-ssh/sshconfig',
+  path   => '/etc/ssh/ssh_config',
 }
 file_line { 'Declare identity file':
 #path must be an absolute path
@@ -21,5 +21,5 @@ file_line { 'Declare identity file':
 #regex to use to search/locate the line
   match  => '^*IdentityFile ~/.ssh/id_rsa*',
 #only replace when the line is present
-  path   => '/home/cheserem/alx-system_engineering-devops/0x0B-ssh/sshconfig',
+  path   => '/etc/ssh/ssh_config',
 }
