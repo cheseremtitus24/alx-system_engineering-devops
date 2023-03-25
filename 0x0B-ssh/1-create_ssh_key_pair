@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+# This script creates a public key with a passphrase of betty
+# and encryption bits of 4096 
+passphrase='betty'
+encryption_bits=4096
+private_key_file_name='school'
+encryption_type='rsa'
+
+ssh-keygen -b $encryption_bits -t $encryption_type -N $passphrase -f $private_key_file_name
