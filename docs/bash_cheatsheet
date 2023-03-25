@@ -1,0 +1,426 @@
+incrementing values in bash
+
+let "val = val + 1"
+echo $val
+let "val += val"
+echo $val
+
+n=$(($n + 1))
+echo -n "$n "
+
+---------------- CPP like incrementation ---------------------------
+
+let "n++"          # let "++n"  also works.
+echo -n "$n "
+
+(( n++ ))          # (( ++n ))  also works.
+echo -n "$n "
+
+---------------- END CPP like incrementation ---------------------------
+
+## Bash can't interpret decimal places as number but rather as strings
+echo "a=1.4; $a+1.3"|bc
+#----------- Use bc to evaluate these -------------
+
+Logical Operators
+if [ $condition1 ] && [ $condition2 ]
+#  Same as:  if [ $condition1 -a $condition2 ]
+
+if [ $condition1 ] || [ $condition2 ]
+# Same as:  if [ $condition1 -o $condition2 ]
+# Returns true if either condition1 or condition2 holds true...
+
+
+a=24
+b=47
+
+if [ "$a" -eq 24 ] && [ "$b" -eq 47 ]
+then
+  echo "Test #1 succeeds."
+else
+  echo "Test #1 fails."
+fi
+Test #1 succeeds.
+cheserem@cheserem:~$ 
+if [ "$a" -eq 98 ] || [ "$b" -eq 47 ]
+then
+  echo "Test #2 succeeds."
+else
+  echo "Test #2 fails."
+fi
+Test #2 succeeds.
+cheserem@cheserem:~$ a=rhino
+b=crocodile
+if [ "$a" = rhino ] && [ "$b" = crocodile ]
+then
+  echo "Test #5 succeeds."
+else
+  echo "Test #5 fails."
+fi 
+Test #5 succeeds.
+
+------------------------------- The Comma Operator ----------------------
+cheserem@cheserem:~$ let "t1 = ((5 + 3, 7 - 1, 15 - 4))"
+echo "t1 = $t1" 
+t1 = 11
+# Here t1 is set to the result of the last operation. Why?
+cheserem@cheserem:~$ let "t2 = ((a = 9, 15 / 3))"      # Set "a" and calculate "t2".
+echo "t2 = $t2    a = $a"         # t2 = 5    a = 9
+t2 = 5    a = 9
+
+
+------------------------------- The Comma Operator ----------------------
+
+----------------------------------Variables Comparison----------------------------------
+
+integer comparison
+
+-eq
+is equal to
+
+if [ "$a" -eq "$b" ]
+
+-ne
+is not equal to
+
+if [ "$a" -ne "$b" ]
+
+-gt
+is greater than
+
+if [ "$a" -gt "$b" ]
+
+-ge
+is greater than or equal to
+
+if [ "$a" -ge "$b" ]
+
+-lt
+is less than
+
+if [ "$a" -lt "$b" ]
+
+-le
+is less than or equal to
+
+if [ "$a" -le "$b" ]
+
+<
+is less than (within double parentheses)
+
+(("$a" < "$b"))
+
+<=
+is less than or equal to (within double parentheses)
+
+(("$a" <= "$b"))
+
+>
+is greater than (within double parentheses)
+
+(("$a" > "$b"))
+
+>=
+is greater than or equal to (within double parentheses)
+
+(("$a" >= "$b"))
+
+
+
+---------------------------------- End of Integer Variable Comparison----------------------------------
+
+----------------------------------String Comparison----------------------------------
+=
+
+is equal to
+
+if [ "$a" = "$b" ]
+---------------------
+==
+is equal to
+
+if [ "$a" == "$b" ]
+-------------------------------------------------------------
+The == comparison operator behaves differently within a double-brackets test than within single brackets.
+[[ $a == z* ]]   # True if $a starts with an "z" (pattern matching).
+[[ $a == "z*" ]] # True if $a is equal to z* (literal matching).
+-------------------------------------------------------------
+
+!=
+is not equal to
+
+if [ "$a" != "$b" ]
+---------------------------------------------------------
+<
+is less than, in ASCII alphabetical order
+
+if [[ "$a" < "$b" ]]
+------------------------------------------------------
+>
+is greater than, in ASCII alphabetical order
+
+if [[ "$a" > "$b" ]]
+--------------------------------------------
+-z
+	string is null, that is, has zero length
+cheserem@cheserem:~$ String=''   # Zero-length ("null") string variable.
+
+if [ -z "$String" ]
+then
+  echo "\$String is null."
+else
+  echo "\$String is NOT null."
+fi     # $String is null.
+$String is null.
+
+----------------------------------------------------------
+-n
+string is not null.
+
+Caution	
+The -n test requires that the string be quoted within the test brackets. Using an unquoted string with ! -z, or even just the unquoted string alone within test brackets (see Example 7-6) normally works, however, this is an unsafe practice. Always quote a tested string. [1]
+
+
+
+============ Example Bash =================
+cheserem@cheserem:~$ if [ -n "$string1" ]  # This time, $string1 is quoted.
+then
+  echo "String \"string1\" is not null."
+else  
+  echo "String \"string1\" is null."
+fi                    # Quote strings within test brackets!
+String "string1" is null.
+cheserem@cheserem:~$ $string1=hello
+bash: =hello: command not found
+cheserem@cheserem:~$ string1=hello
+cheserem@cheserem:~$ if [ -n "$string1" ]  # This time, $string1 is quoted.
+then
+  echo "String \"string1\" is not null."
+else  
+  echo "String \"string1\" is null."
+fi                    # Quote strings within test brackets!
+String "string1" is not null.
+================ End Example null test =======================
+
+
+
+----------------------------------End of String Comparison----------------------------------
+
+
+
+
+
+
+
+
+---------------------------------- File Operations -----------------------
+Returns true if 
+-e 
+	file exists
+-a
+	file exists
+	This is identical in effect to -e. It has been "deprecated" & its use is discouraged
+
+-f
+	file is a regular file (not a directory or device file)
+-s
+	file is not zero size
+-d 
+	file is a directory
+-b
+	file is a block device
+-c 
+	file is a character device
+@@@@@@@@@@@@@@@@@@@ @Checking for File  @@@@@@@@@@@@@22
+device0="/dev/sda2"    # /   (root directory)
+if [ -b "$device0" ]
+then
+  echo "$device0 is a block device."
+fi
+
+# /dev/sda2 is a block device.
+
+
+
+device1="/dev/ttyS1"   # PCMCIA modem card.
+if [ -c "$device1" ]
+then
+  echo "$device1 is a character device."
+fi
+
+# /dev/ttyS1 is a character device.
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@22 End of File Checks @@@@@@@@@@@@@@@@@@@@@@@@@
+
+-p 
+	file is a pipe
+	
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ Pipes @@@@@@@@@@@@@@@@@@@@
+function show_input_type()
+{
+   [ -p /dev/fd/0 ] && echo PIPE || echo STDIN
+}
+
+show_input_type "Input"                           # STDIN
+echo "Input" | show_input_type                    # PIPE
+
+# This example courtesy of Carl Anderson.
+@@@@@@@@@@@@@@@@@@ end of script @@@@@@@@@@@@@@@@@
+
+
+-h
+	file is a symbolic link
+
+-L
+	file is a symbolic link
+
+-S
+	file is a socket
+	
+-t
+	file (descriptor) is associated with a terminal device
+
+	This test option may be used to check whether the stdin [ -t 0 ] or stdout [ -t 1 ] in a given script is a terminal.
+	
+-r
+	file has read permission (for the user running the test)
+
+-w
+	file has write permission (for the user running the test)
+
+-x
+	file has execute permission (for the user running the test)
+	
+-g
+	set-group-id (sgid) flag set on file or directory
+	If a directory has the sgid flag set, then a file created within that 		directory belongs to the group that owns the directory, not necessarily 	to the group of the user who created the file. This may be useful for a 	directory shared by a workgroup.
+	
+-u
+
+	set-user-id (suid) flag set on file
+
+	A binary owned by root with set-user-id flag set runs with root privileges, even when an ordinary user invokes it. [2] This is 	useful for executables (such as 	pppd and cdrecord) that need to access 	system hardware. Lacking the suid flag, these binaries could not be invoked by a non-root user.
+
+	      -rwsr-xr-t    1 root       178236 Oct  2  2000 /usr/sbin/pppd
+	      
+	A file with the suid flag set shows an s in its permissions.
+	
+-k
+	sticky bit set
+
+	Commonly known as the sticky bit, the save-text-mode flag is a special 	type of file permission. If a file has this flag set, that file will be kept in cache 		memory, for quicker access. [3] If set on a directory, it restricts write permission. Setting the sticky bit adds a t to the permissions on the file or directory 		listing. This restricts altering or deleting specific files in that directory to the owner of those files.
+
+	      drwxrwxrwt    7 root         1024 May 19 21:26 tmp/
+	      
+	If a user does not own a directory that has the sticky bit set, but has write permission in that directory, she can only delete those files that she owns in it. 	This keeps users from inadvertently overwriting or deleting each other's files in a publicly accessible directory, such as /tmp. (The owner of the directory or 		root can, of course, delete or rename files there.)
+
+
+-O
+	you are owner of file
+
+-G
+	group-id of file same as yours
+
+-N
+	file modified since it was last read
+	
+f1 -nt f2
+	file f1 is newer than f2
+f1 -ot f2
+	file f1 is older than f2
+f1 -ef f2
+	files f1 and f2 are hard links to the same file
+!
+	"not" -- reverses the sense of the tests above (returns true if condition absent).
+---------------------------------- File Operations -----------------------
+
+
+
+
+
+
+__________________________ Magic of the test command utility ____________________________________________________
+
+# Dissection 
+-d tests for the existence of a specific directory
+-e tests for the existence of a file
+-r determines if the file has read permission
+-s determines if the file has some type of contents (is not empty)
+-w determines if the file has write permission
+-x determines if the file is executable
+-nt compares the first file in the argument with the second file to determine if the first file
+is newer
+-ot compares the first file in the argument with the second file to determine if the first file
+is older
+-eq compares two integers to determine if they are equal
+! determines if an expression is false
+stringa = stringb determines if two strings are equal
+
+
+while [ "$furniture" != "desk" ]; do
+
+# can be substituted as 
+
+while test $furniture != "desk" ; do
+
+
+============== Sample Commandline Usage ======================
+user@Mint:~/pycharm-2020.1/bin$test -e format.shs 
+user@Mint:~/pycharm-2020.1/bin$echo $?
+1
+user@Mint:~/pycharm-2020.1/bin$test -e format.sh 
+user@Mint:~/pycharm-2020.1/bin$echo $?
+0
+user@Mint:~/pycharm-2020.1/bin$touch hello
+user@Mint:~/pycharm-2020.1/bin$test -s hello 
+user@Mint:~/pycharm-2020.1/bin$echo $?
+1
+user@Mint:~/pycharm-2020.1/bin$test -s pycharm.s
+pycharm.sh   pycharm.svg  
+user@Mint:~/pycharm-2020.1/bin$test -s pycharm.sh
+user@Mint:~/pycharm-2020.1/bin$echo $?
+0
+
+===================== Integer Test options using test commandline utility==================
+option		Meaning			Example		Results
+-eq		Equal to		test $a -eq $b   0 if true else 1
+-gt		Greater than		test $a -gt $b   0 if true else 1
+-lt		Less than 		test $a -lt $b   0 if true else 1
+-ge		>=			test $a -ge $b   0 if true else 1
+-le		<=			test $a -le $b   0 if true else 1
+-ne		!=			test $a -ne $b   0 if true else 1
+
+===================== String Test options using test commandline utility  ==================
+
+option			Meaning			Example			Results
+-z			Test 0 length string	test -z $str   		0 if true else 1
+-n			Test non 0 len string	test -n $str   		0 if true else 1
+string1 = string2	Test 2 str equality 	test $str = $str2   	0 if true else 1
+string1 != string2	Test 2 str inequality 	test $str != str2   	0 if true else 1
+string			Test 4 non 0 len string	test $str   		0 if true else 1
+
+===================== File Test options using test commandline utility ==================
+
+option			Meaning			Example			Results
+-b			True if exists and is a block special file 	test -b file   		0 if true else 1
+-c			True if file exists & is a char special file g	test -c file   		0 if true else 1
+-d			True if file exists & is a directory		test -d file   		0 if true else 1
+-e			True if file exists 				test -e file   		0 if true else 1
+-f			True if file exists & is a regular file		test -f file   		0 if true else 1
+
+-nt			Compares the first file with second file 
+			to check if first is newer 	 		test filea -nt fileb	0 if true else 1
+
+-ot			Compares the first file with second file 
+			to check if first is older 	 		test filea -ot fileb	0 if true else 1
+-r			True if file exists & is a readable		test -r file   		0 if true else 1
+-s			True if file exists & size > 0			test -s file   		0 if true else 1
+-w			True if file exists & is writable		test -w file   		0 if true else 1
+-x			True if file exists & is executable		test -x file   		0 if true else 1
+
+===================== Boolean Operators Used with the test command ============================
+
+option			Meaning			Example					Results
+-a			Logical AND		test expression1 -a expression2   	0 if true else 1
+-o			Logical OR		test expression1 -o expression2   	0 if true else 1
+!			Logical negation	test !expression1 		   	0 if true else 1
