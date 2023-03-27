@@ -40,3 +40,15 @@ cheserem@cheserem:~/alx-system_engineering-devops/docker$ docker kill 974e0cfb3a
 cheserem@cheserem:~/alx-system_engineering-devops/docker$ docker ps
 CONTAINER ID   IMAGE     COMMAND   CREATED   STATUS    PORTS     NAMES
 cheserem@cheserem:~/alx-system_engineering-devops/docker$ 
+
+## Delete a Docker image
+docker images
+CONTAINER ID   IMAGE          COMMAND       CREATED         STATUS         PORTS     NAMES
+974e0cfb3ae4   276b5b6b7721   "/bin/bash"   3 minutes ago   Up 3 minutes             focused_mcclintock
+docker image rm -f 974e0cfb3ae4
+docker images
+CONTAINER ID   IMAGE          COMMAND       CREATED         STATUS         PORTS     NAMES
+
+##### Docker Port Forwarding
+docker run -p 2222:22 --detach --tty --interractive sylvainkalache/264-1
+

@@ -1,3 +1,15 @@
+# Efficiency
+storing binaries in variables enables for 10 times faster execution
+CLEAR=`clear`
+echo $CLEAR
+
+- This is because the system
+does not have to first locate (in a directory) and execute the clear command—it is instead
+stored in a variable for immediate action.This is because the system
+does not have to first locate (in a directory) and execute the clear command—it is instead
+stored in a variable for immediate action.
+
+
 incrementing values in bash
 
 let "val = val + 1"
