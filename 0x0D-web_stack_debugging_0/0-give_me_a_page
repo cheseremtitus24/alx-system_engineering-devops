@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+# This script spins up the apache2 web server
+/etc/init.d/apache2 start
