@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+# This Script Performs an apt update
+# Installs nginx web server
+# adds some content to the landing page
+# Finally Starts the nginx service
+
+apt update && apt install -y vim nginx
+echo "Hello World!" > /var/www/html/index.html
+rm -rf /var/www/html/index.nginx-debian.html
+/etc/init.d/nginx start
