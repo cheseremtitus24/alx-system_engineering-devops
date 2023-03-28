@@ -4,7 +4,7 @@
 # adds some content to the landing page
 # Finally Starts the nginx service
 
-sudo apt-get -y update
-sudo apt-get install -y nginx
-sudo echo "Hello World!" > /var/www/html/index.html
-sudo /etc/init.d/nginx start
+apt-get -y update
+apt-get install -y nginx
+echo "Hello World!                 " > /var/www/html/index.html
+/etc/init.d/nginx start
