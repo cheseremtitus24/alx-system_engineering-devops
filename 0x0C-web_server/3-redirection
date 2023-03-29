@@ -9,5 +9,5 @@ apt-get -y update
 apt-get install -y nginx
 echo "Hello World!                 " > /var/www/html/index.html
 data="location /redirect_me {return 301 https://www.youtube.com/watch?v=QH2-TGUlwu4;} "
-sed -i "/^\s*server_name _*/a $data" default
+sed -i "/^\s*server_name _*/a $data" /etc/nginx/sites-enabled/default
 /etc/init.d/nginx restart
