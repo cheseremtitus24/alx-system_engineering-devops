@@ -70,8 +70,6 @@ class nginx_server {
 # Example:
 #   include nginx_server
 
-# Autoloader layout
-autoload (nginx_server, 'test2')
 
 class { 'nginx_server': }
 include nginx_server
