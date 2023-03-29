@@ -8,5 +8,6 @@
 apt-get -y update
 apt-get install -y nginx
 echo "Hello World!                 " > /var/www/html/index.html
-sed -i "/listen 80 default_server/a rewrite ^/redirect_me https://www.youtube.com/watch?v=dQw4w9WgXcQ permanent;"
-/etc/init.d/nginx restart
+data="location /redirect_me {return 301 https://www.youtube.com/watch?v=QH2-TGUlwu4;} "
+sed -i "/^\s*server_name _*/a $data" default
+/etc/init.d/nginx start
