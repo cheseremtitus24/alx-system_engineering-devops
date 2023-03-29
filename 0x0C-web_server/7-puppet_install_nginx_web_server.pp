@@ -22,12 +22,12 @@ class nginx_server {
     ensure  => file,
     content => 'Ceci n\'est pas une page \n',
     notify  => Service['nginx'],
-  },
+  }
   file { '/var/www/html/index.html':
     ensure  => file,
     content => 'Hello World!                 ',
     notify  => Service['nginx'],
-  },
+  }
   file { '/etc/nginx/sites-enabled/default':
     ensure  => file,
     content => '
