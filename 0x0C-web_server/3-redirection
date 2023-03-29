@@ -1,9 +1,13 @@
 #!/usr/bin/env bash
-# Install nginx on my web01 server
-# Configure nginx server so /redirect_me is redirecting to another page
-# Redirection must be a 301 moved permanently
-sudo apt-get -y install nginx
-sudo service nginx start
-sudo sed -i '37i\rewrite ^/redirect_me https://www.youtube.com/watch?v=QH2-TGUlwu4 permanent;' /etc/nginx/sites-available/default
-sudo service nginx restart
+# This Script Performs an apt update
+# Installs nginx web server
+# adds some content to the landing page
+# Adds a permanent redirect to a youtube url
+# Finally Starts the nginx service
 
+apt-get -y update
+apt-get install -y nginx
+echo "Hello World!                 " > /var/www/html/index.html
+data="location /redirect_me {return 301 https://www.youtube.com/watch?v=QH2-TGUlwu4;} "
+sed -i "/^\s*server_name _*/a $data" default
+/etc/init.d/nginx start
