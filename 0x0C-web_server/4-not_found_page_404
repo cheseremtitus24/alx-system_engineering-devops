@@ -21,6 +21,6 @@ location = /error-page.html {
         internal;
 }" > $snippet_path;
 snippet_data="include snippets/error-page.conf;"
-sed -i "/^\s*server_name _*/a $snippet_data" /etc/nginx/sites-enabled/default
+sed -i "/^\s*server_name _*/i $snippet_data" /etc/nginx/sites-enabled/default
 
 /etc/init.d/nginx restart
