@@ -1,0 +1,30 @@
+1. To redirect an entire domain to a new site:
+Redirect 301 / http://www.example.com/
+Replace the example domain with your new redirect destination. This will 301 redirect every page on your site to the corresponding URL on the target domain.
+
+2. To redirect a single page
+Redirect 301 /oldpage/ http://www.example.com/newpage/
+You can use this redirect across different domains, or on your own site.
+3. Using Apache mod_rewrite
+You can also use Apache mod_rewrite in your .htaccess file for more flexible redirection. For example, here's the code you'd use to redirect from a non-www to a www subdomain.
+
+RewriteEngine on
+RewriteBase /
+rewritecond %{http_host} ^domain.com [nc]
+rewriterule ^(.*)$ http://www.domain.com/$1 [r=301,nc]
+
+4. PHP redirect
+Here is an example of implementing a 301 redirect using PHP:
+
+<?php
+header("Location: https://www.example.com/", true, 301);
+exit();
+?>
+
+5. JS- Redirect
+<script type="text/javascript">
+    function redirect1(){
+        window.location = "http://www.example.com/new-url/"  
+	}   
+	setTimeout('redirect1()', 5000);   
+</script>
