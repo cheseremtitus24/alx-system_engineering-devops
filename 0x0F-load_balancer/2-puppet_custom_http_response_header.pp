@@ -11,7 +11,6 @@
 #
 #     include nginx_server
 #
-include stdlib
 class nginx_server {
   # Install Nginx package
   package { 'nginx':
@@ -56,13 +55,6 @@ class nginx_server {
     notify  => Service['nginx'],
   }
 
-  $header = 'add_header X-Served-By $hostname;'
-
-  file_line { 'add_custom_header':
-    path => '/etc/nginx/sites-enabled/default',
-    line => $header,
-  }
-
   # Start and enable Nginx service
   service { 'nginx':
     ensure  => running,
@@ -79,6 +71,7 @@ class nginx_server {
 #
 # Example:
 #   include nginx_server
+
 
 class { 'nginx_server': }
 include nginx_server
