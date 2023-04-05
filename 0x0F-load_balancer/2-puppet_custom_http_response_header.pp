@@ -8,7 +8,7 @@ file_line { 'add_custom_header':
 }
 
 service { 'nginx':
-  ensure => running,
-  enable => true,
+  ensure    => running,
+  enable    => true,
   subscribe => File_line['add_custom_header'],
 }
