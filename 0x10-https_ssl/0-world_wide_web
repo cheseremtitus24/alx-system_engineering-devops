@@ -1,0 +1,54 @@
+#!/usr/bin/env bash
+# This script enumerates Domains and subdomains outputs them
+
+RECORD_TYPE=""
+SUB_DOMAIN=""
+DESTINATION=""
+
+function split_on_space()
+{
+
+	#Read the string value
+	#echo "Enter book name, author name and price by separating comma. "
+	#read text
+	text=$ALL_RESPONSE
+
+	# Set comma as delimiter
+	IFS=','
+
+	#Read the split words into an array based on comma delimiter
+	read -a strarr <<< "$text"
+
+	#Print the splitted words
+	#echo "domainName : ${strarr[0]}"
+	SUB_DOMAIN=${strarr[0]}
+	#echo "Record Type : ${strarr[1]}"
+	RECORD_TYPE=${strarr[1]}
+	#echo "IP: ${strarr[2]}"
+	DESTINATION=${strarr[2]}
+}
+
+if test $# -eq 2
+then
+
+	ALL_RESPONSE=$(dig "${2}.${1}" | grep -A1 'ANSWER SECTION:' | awk '{print $1,$4,$5}'| tr -d ';;'|tr ' ' ','|tr -d '\n'| cut -d ',' -f 3,4,5 )
+	split_on_space;
+	SUB_DOMAIN=$(echo "$SUB_DOMAIN" | cut -d '.' -f 1)
+	echo "The subdomain $SUB_DOMAIN is a $RECORD_TYPE record and points to $DESTINATION"
+elif test $# -eq 1 
+then
+	array=(www lb-01 web-01 web-02)
+	for i in "${array[@]}"
+	do
+		#foo="${1}.${i}"
+		#echo "domain is : $foo"
+		ALL_RESPONSE=$(dig "${i}.${1}" | grep -A1 'ANSWER SECTION:' | awk '{print $1,$4,$5}'| tr -d ';;'|tr ' ' ','|tr -d '\n'| cut -d ',' -f 3,4,5 )
+		split_on_space;
+		SUB_DOMAIN=$(echo "$SUB_DOMAIN" | cut -d '.' -f 1)
+		echo The subdomain "$SUB_DOMAIN" is a "$RECORD_TYPE" record and points to "$DESTINATION"
+	done
+else
+	exit 0
+fi
+
+#echo $ALL_RESPONSE
