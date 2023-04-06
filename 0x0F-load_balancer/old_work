@@ -1,0 +1,18 @@
+# enables custom headers on nginx
+include stdlib
+$header = 'server_name _;\n add_header X-Served-By $hostname;'
+
+file_line { 'add_custom_header':
+  #path    => '/etc/nginx/nginx.conf',
+  path => '/home/cheserem/Desktop/alx-system_engineering-devops/0x0F-load_balancer/default',
+  line  => 'server_name _; add_header X-Served-By $hostname;',
+  after   => 'http {',
+  match   => '^server_name _*',
+  ensure  => present,
+}
+
+service { 'nginx':
+  ensure    => running,
+  enable    => true,
+  subscribe => File_line['add_custom_header'],
+}
