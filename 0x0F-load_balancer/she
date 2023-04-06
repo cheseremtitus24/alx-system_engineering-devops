@@ -1,0 +1,23 @@
+#!/usr/bin/env bash
+# This Script Performs an apt update
+# Installs haproxy load balancer
+# Finally Starts the haproxy service
+
+echo -e "backend web-backend
+   balance roundrobin
+   server web1 54.210.108.11:80 check
+   server web2 54.158.179.90:80 check
+
+frontend http
+  bind *:80
+  mode http
+
+  acl url_blog path_beg /
+  #use_backend blog-backend if url_blog
+
+  default_backend web-backend
+" > tmp
+
+
+sed -i '/^\s*errorfile 504 */r tmp' testfile
+rm -rf tmp

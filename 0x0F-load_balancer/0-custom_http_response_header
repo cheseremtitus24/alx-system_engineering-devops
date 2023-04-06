@@ -24,7 +24,6 @@ snippet_data="include snippets/error-page.conf;"
 sed -i "/^\s*server_name _*/i $snippet_data" /etc/nginx/sites-enabled/default
 
 Custom_header="add_header X-Served-By $hostname;"
-
 sed -i "/^\s*server_name _*/a $Custom_header" /etc/nginx/sites-enabled/default
 
 /etc/init.d/nginx restart
