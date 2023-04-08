@@ -1,6 +1,15 @@
 #!/usr/bin/env bash
 # Enables nginx to run on port 80
-sed -i 's/8080/80/g' /etc/nginx/sites-enabled/default
+# insert new content for port 80
+echo -e "
+	listen 80 default_server;
+        listen [::]:80 default_server ipv6only=on;
+" > tmp
+
+
+sed -i '/^\s*listen [::]:8080 */r tmp' /etc/nginx/sites-enabled/default
+rm -rf tmp
+
 /etc/init.d/nginx reload
 pkill nginx
 /etc/init.d/nginx restart
