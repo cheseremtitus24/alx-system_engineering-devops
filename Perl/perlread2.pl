@@ -4,8 +4,8 @@
 # in the file. Count the number of records in the file.
 
 # The open( ) function returns true if the file is opened successfully, and re  turns false if it fails to open
-open (FILEIN, "/tmp/Perl/students") || warn "Could not open students
-file\n";
+$open_status = open (FILEIN, "./students") || warn "Could not open students file\n";
+
 while (<FILEIN>)
 {
 	print "$_";
