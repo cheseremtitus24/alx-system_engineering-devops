@@ -2,7 +2,7 @@
 # script installs a firewall and enables
 # incoming traffic from port 22,80 and 443
 sudo apt install ufw -y
-sudo ufw enable
+echo "y" | sudo ufw enable
 sudo ufw allow ssh
 sudo ufw allow http
 sudo ufw allow https
