@@ -1,0 +1,11 @@
+trap "rm ~/tmp/* 2> /dev/null; exit" 0
+This command has two arguments: a command to be executed and a signal number from the
+operating system.
+ The command rm ~/tmp/* 2> /dev/null; exit deletes everything in the
+user’s tmp directory, redirects the error output of the rm command to the null device (so it
+does not appear on the screen), and issues an exit command to terminate the shell.
+ The signal specified is 0, which is the operating system signal generated when a shell script is exited. 
+ So,if this sample command is part of a script file, it causes the specified rm command to execute
+when signal 0 is sent by the operating system.
+
+To list System Signals use $ trap -l
