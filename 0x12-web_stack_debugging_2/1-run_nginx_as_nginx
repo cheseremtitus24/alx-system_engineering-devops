@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+# Secures nginx by setting the master process to be run as the nginx user
+pkill apache2
+# add the statement "user nginx;" to the file /etc/nginx/nginx.conf
+sed -i 's/80/8080/g' /etc/nginx/sites-enabled/default
+chown -R nginx:nginx /etc/nginx
+chown -R nginx:nginx /var/log/nginx
+chmod 644 /etc/nginx/nginx.conf
+su nginx -s /bin/sh -c "nginx -c /etc/nginx/nginx.conf"
+#ps auxff | grep ngin[x] && netstat -lpn
