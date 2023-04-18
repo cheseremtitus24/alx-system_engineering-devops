@@ -1,0 +1,4 @@
+sudo sed -i '/^#.*forward.*=1$/s/^#//' /etc/ufw/sysctl.conf
+ufw disable
+ufw enable
+sysctl -p

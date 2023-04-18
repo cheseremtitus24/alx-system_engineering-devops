@@ -1,0 +1,1 @@
+sudo ufw route allow from any port 8080 to any port 80
