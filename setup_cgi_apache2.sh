@@ -6,7 +6,8 @@ echo -e "
 	  AddHandler cgi-script .cgi .pl .py
 " > tmp
 
-
+# below the line Directory /var/www/ - add contents of tmp above below
+# this line
 sed -i '/^.Directory \/var\/www*/r tmp' /etc/apache2/apache2.conf
 
 # enable cgi on apache2 web server
