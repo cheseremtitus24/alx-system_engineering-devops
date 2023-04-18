@@ -2,7 +2,7 @@
 # This script runs the whoami command as another user
 if test $# -eq 1 
 then
-	su "$1" -c whoami
+	su "$1" -c whoami -s /bin/sh
 else
 	echo "usage: ./$0 <user-name>";
 fi
