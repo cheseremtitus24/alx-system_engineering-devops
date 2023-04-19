@@ -1,0 +1,3 @@
+mysqldump -u root -p --all-databases --master-data > dbdump.sql
+# Restore database on Slave DB
+mysql -u root -p < /tmp/dbdump.sql
