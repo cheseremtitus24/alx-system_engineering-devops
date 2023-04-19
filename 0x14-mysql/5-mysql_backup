@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+# This script dumps the contents of the database
+# tyrell_corp and backs it up to a tape archive
+
+if test #$ -eq 1
+then 
+	mysqldump -u root -p "$1" tyrell_corp > backup.sql
+	DATE=$(date +'%d-%m-%Y')
+	tar cvfz  "$DATE.tar.gz" backup.sql
+else
+	echo "Usage: ./$0 <mysql_root_password>"
+fi
