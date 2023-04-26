@@ -72,7 +72,7 @@ def call_rest_endpoints(urls):
         pass
 
     else:
-        print("Employee {} is done with tasks ({}/{}):".format(emp_full_name,
+        print("Employee {} is done with tasks({}/{}):".format(emp_full_name,
               len(completed_tasks), total_tasks))
         for task in completed_tasks:
             print("\t {}".format(task.get('title')))
