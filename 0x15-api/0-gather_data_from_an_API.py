@@ -5,9 +5,9 @@ to request data from several Rest API
 endpoints to retrieve todo list data
 """
 import json
+import sys
 from urllib.error import HTTPError, URLError
 from urllib.request import urlopen, Request
-import sys
 
 
 def decode_data(read_response, response):
