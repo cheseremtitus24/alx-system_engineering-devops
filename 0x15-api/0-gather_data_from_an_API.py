@@ -45,7 +45,9 @@ def make_request(url, headers=None):
 def call_rest_endpoints(urls):
     """
     Takes in a list of REST API endpoints and retrieves data, parses
-    the data then prints the completed tasks of an employee
+    the data then prints the completed tasks of an employee;
+    the list should contain two urls. The first url should be an endpoints
+    to retrieve the user's full name and the second retrieves their tasks todo list.
     """
     emp_full_name = None
     tasks_list = list()
