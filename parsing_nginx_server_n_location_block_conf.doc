@@ -1,0 +1,257 @@
+# Parsing the nginx '''listen''' Directive to Find Possible Matches.
+The '''listen''' directive can be set to:
+1. An IP address/port combo.
+'''
+server {
+          listen 127.0.0.1:80;
+}
+'''
+2. A lone IP address which will then listen on the default port 80.
+'''
+server {
+          listen 127.0.0.1;
+}
+'''
+3. A lone port which will listen to every interface on that port
+'''
+server {
+          listen 80;
+}
+'''
+4. The path to a Unix socket
+'''
+server {
+          listen unix:/run/myapp/myapp.sock;
+}
+'''
+# This option will only have implications when passing requests between different servers.
+5. A block with no listen directive uses the value 0.0.0.0:80.
+
+#Nginx will match specific resolutions 127.0.0.1:80 first before it matches 0.0.0.0:80
+& When there are multiple matching server blocks with same IP & port nginx will then evaluate the '''server_name''' directive.
+
+It is important to understand that Nginx will only evaluate the server_name directive when it needs to distinguish between server blocks that match to the same level of specificity in the listen directive. For instance, if example.com is hosted on port 80 of 192.168.1.10, a request for example.com will always be served by the first block in this example, despite the server_name directive in the second block.
+"""
+server {
+    listen 192.168.1.10;
+    . . .
+}
+server {
+    listen 80;
+    server_name example.com;
+    . . .
+}
+"""
+
+
+Examples for Liste block Matching
+In this example, if the Host header of the request was set to host1.example.com, the second server would be selected:
+
+server {
+    listen 80;
+    server_name *.example.com;
+
+    . . .
+
+}
+
+server {
+    listen 80;
+    server_name host1.example.com;
+
+    . . .
+
+}
+"""
+2. In this example, if the request had a Host header of www.example.org, the second server block would be selected:
+
+server {
+    listen 80;
+    server_name www.example.*;
+
+    . . .
+
+}
+
+server {
+    listen 80;
+    server_name *.example.org;
+
+    . . .
+
+}
+
+server {
+    listen 80;
+    server_name *.org;
+
+    . . .
+
+} 
+"""
+3. For instance, if the request has a Host header set to www.example.com, the third server block will be selected:
+
+server {
+    listen 80;
+    server_name host1.example.com;
+
+    . . .
+
+}
+
+server {
+    listen 80;
+    server_name example.com;
+
+    . . .
+
+}
+
+server {
+    listen 80;
+    server_name www.example.*;
+
+    . . .
+
+}
+4. For example, if the Host header of the request is set to www.example.com, then the second server block will be selected to satisfy the request:
+
+server {
+    listen 80;
+    server_name example.com;
+
+    . . .
+
+}
+
+server {
+    listen 80;
+    server_name ~^(www|host1).*\.example\.com$;
+
+    . . .
+
+}
+
+server {
+    listen 80;
+    server_name ~^(subdomain|set|www|host1).*\.example\.com$;
+
+    . . .
+
+}
+
+# Location Block Syntax
+- Location blocks generally take the following form:
+location optional_modifier location_match {
+
+    . . .
+
+}
+#### The '''location_match''' is used by nginx to check against URI Matches.
+### The '''optional_modifier''' will cause the associated location block to be interpreted as follows:
+
+1. (none): location is interpreted as a prefix match and will only be matched against the beginning of the request URI.
+2. =: match must be exact
+3. ~: Case-sensitive regular expression match
+4. ~*: Case-Insensitive regex match.
+5. ^~: If a carat and a tilde modifier is present, and if this block is selected as the best non-regular expression match, regular expression matching will not take place.
+
+## Examples Demonstrating Location Block Syntax
+1. (none) selected to respond for request URIs that look like /site, /site/page1/index.html, or /site/index.html:
+
+location /site {
+    . . .
+}
+2. (=) this block will always be used to respond to a request URI that
+ looks like /page1 &  
+not be used to respond to a /page1/index.html request URI.
+Keep in mind that if this block is selected and the request is fulfilled using an index page, an internal redirect will take place to another location that will be the actual handler of the request:
+
+location = /page1 {
+    . . .
+}
+3. (~) - Case-sensitive regex. this block could be used to handle requests for /tortoise.jpg, but not for /FLOWER.PNG:
+location ~ \.(jpe?g|png|gif|ico)$ {
+    . . .
+}
+4.(~*) - Case-Insentivie regex matching:Here, both /tortoise.jpg and /FLOWER.PNG could be handled by this block: 
+location ~* \.(jpe?g|png|gif|ico)$ {
+    . . .
+}
+5. Finally, this block would prevent regular expression matching from occurring if it is determined to be the best non-regular expression match. It could handle requests for /costumes/ninja.html:
+location ^~ /costumes {
+    . . .
+}
+
+## Location Block Evaluation Jump to Other Locations
+
+Some directives that can lead to this type of internal redirect are:
+
+index
+try_files
+rewrite
+error_page
+
+a. index
+In this example, the first location is matched by a request URI of /exact, but in order to handle the request, the index directive inherited by the block initiates an internal redirect to the second block:
+"""
+index index.html;
+location = /exact {
+    . . .
+}
+location / {
+    . . .
+}
+"""
+b. try_files directive.
+root /var/www/main;
+location / {
+    try_files $uri $uri.html $uri/ /fallback/index.html;
+}
+
+location /fallback {
+    root /var/www/another;
+}
+n the above example, if a request is made for /blahblah, the first location will initially get the request. It will try to find a file called blahblah in /var/www/main directory. If it cannot find one, it will follow up by searching for a file called blahblah.html. It will then try to see if there is a directory called blahblah/ within the /var/www/main directory. Failing all of these attempts, it will redirect to /fallback/index.html. This will trigger another location search that will be caught by the second location block. This will serve the file /var/www/another/fallback/index.html.
+
+c. rewrite directive location reevaluation
+For example, if we modify the last example to include a rewrite, we can see that the request is sometimes passed directly to the second location without relying on the try_files directive:
+
+root /var/www/main;
+location / {
+    rewrite ^/rewriteme/(.*)$ /$1 last;
+    try_files $uri $uri.html $uri/ /fallback/index.html;
+}
+location /fallback {
+    root /var/www/another;
+}
+"""
+
+In the above example, a request for /rewriteme/hello will be handled initially by the first location block. It will be rewritten to /hello and a location will be searched. In this case, it will match the first location again and be processed by the try_files as usual, maybe kicking back to /fallback/index.html if nothing is found (using the try_files internal redirect we discussed above).
+
+However, if a request is made for /rewriteme/fallback/hello, the first block again will match. The rewrite be applied again, this time resulting in /fallback/hello. The request will then be served out of the second location block.
+
+Nginx first checks for location = blocks. Those blocks are used to catch an exact match of the requested url. Once such a block is found, its content is applied, and Nginx stops looking for more matches.
+"""
+location = /my-exact-file.html {
+  rewrite /my-exact-file.html http://external-website.com/
+}
+"""
+In this example, a request for /my-exact-file.html will be redirected to http://external-website.com. Note that you need to repeat the url in both the location = block and the rewrite rule.
+
+
+d. The error_page directive can lead to an internal redirect similar to that created by try_files. This directive is used to define what should happen when certain status codes are encountered. This will likely never be executed if try_files is set, since that directive handles the entire life cycle of a request.
+
+Consider this example:
+"""
+root /var/www/main;
+location / {
+    error_page 404 /another/whoops.html;
+}
+location /another {
+    root /var/www;
+}
+"""
+
+Every request (other than those starting with /another) will be handled by the first block, which will serve files out of /var/www/main. However, if a file is not found (a 404 status), an internal redirect to /another/whoops.html will occur, leading to a new location search that will eventually land on the second block. This file will be served out of /var/www/another/whoops.html.
+
