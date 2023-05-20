@@ -1,0 +1,59 @@
+upstream app_server_wsgiapp {
+  server 0.0.0.0:5000 fail_timeout=0;
+}
+upstream app_sserver_wsgiapp {
+  server 0.0.0.0:5001 fail_timeout=0;
+}
+ server {
+        listen 80 default_server;
+        listen [::]:80 default_server;
+
+        root /var/www/html;
+
+        index index.html index.htm index.nginx-debian.html;
+
+        server_name _;
+        add_header X-Served-By $hostname;
+
+        location /current{
+                root /data/web_static/;
+        } # in above the value of location is appended to the root to be /home/tony/hello
+        #http://localhost/hello/index.html
+
+        # alias directive
+        location  /hbnb_static {
+                alias /data/web_static/current;
+        }
+
+location  /airbnb-onepage {
+    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+    proxy_set_header Host $http_host;
+    proxy_redirect off;
+
+    if (!-f $request_filename) {
+      proxy_pass http://app_server_wsgiapp;
+      break;
+    }
+  }
+# Using path Location Matching
+location /airbnb-dynamic {
+	rewrite ^/airbnb-dynamic/(.*)$ /$1 last;
+}
+location  /number_odd_or_even {
+    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+    proxy_set_header Host $http_host;
+    proxy_redirect off;
+
+    if (!-f $request_filename) {
+      proxy_pass http://app_sserver_wsgiapp;
+      break;
+    }
+  }
+
+        location / {
+          try_files $uri $uri/ =404;
+        }
+        location = /redirect_me {
+          return 301 https://www.youtube.com/watch?v=QH2-TGUlwu4;
+        }
+      }
