@@ -1,5 +1,4 @@
 [rewrite_module Resource & Examples]{https://www.thegeekstuff.com/2017/08/nginx-rewrite-examples/}
-[rewrite module apache to nginx]{http://blog.pixelastic.com/2013/09/27/understanding-nginx-location-blocks-rewrite-rules/}
 # Parsing the nginx '''listen''' Directive to Find Possible Matches.
 The '''listen''' directive can be set to:
 1. An IP address/port combo.

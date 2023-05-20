@@ -21,4 +21,9 @@ snippet_data="include snippets/error-page.conf;"
 sed -i "/^\s*server_name _*/i $snippet_data" /etc/nginx/sites-enabled/default
 
 # Comments out a line that contains a regex string
+# foward = 1
+forward = 1
 sudo sed -i '/^#.*forward.*=1$/s/^#//' /etc/ufw/sysctl.conf
+
+# delete a line that matches a particular pattern
+sed -i '/pattern to match/d' infile
