@@ -1,7 +1,7 @@
 # Increases the Limit of File Descriptors.
 exec { 'mod_nginx_config':
   command => 'sed -i s/^ULIMIT.*/ULIMIT="\"-n 7000\""/g /etc/default/nginx',
-  onlyif      => 'test -e /etc/default/nginx',
+  onlyif  => 'test -e /etc/default/nginx',
   path    => ['/bin', '/usr/bin'],
   notify  => Service['nginx'],
   require => Package['nginx'],
