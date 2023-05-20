@@ -66,16 +66,16 @@ location  /api/v1{
     }
   }
 
-        location / {
-    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-    proxy_set_header Host $http_host;
-    proxy_redirect off;
+        location /{
+	    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+	    proxy_set_header Host $http_host;
+	    proxy_redirect off;
 
-    if (!-f $request_filename) {
-      proxy_pass http://app_main_webpage_server_wsgiapp;
-      break;
-    }
-          try_files $uri $uri/ =404;
+	    if (!-f $request_filename) {
+	      proxy_pass http://app_main_webpage_server_wsgiapp;
+	      break;
+	    }
+        try_files $uri $uri/ =404;
         }
         location = /redirect_me {
           return 301 https://www.youtube.com/watch?v=QH2-TGUlwu4;
